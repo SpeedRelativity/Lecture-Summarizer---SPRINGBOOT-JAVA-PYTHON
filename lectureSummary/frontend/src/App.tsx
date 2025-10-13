@@ -1,43 +1,10 @@
-import { useState } from "react";
-import { useRef } from "react";
 import "./App.css";
+import Home from "./pages/Home.tsx";
 
 function App() {
-  const fileRef = useRef<HTMLInputElement>(null);
-  const [fileName, setFileName] = useState("");
-
-  const handleClick = () => {
-    fileRef.current?.click();
-    console.log(fileRef);
-  };
-
   return (
     <>
-      <div className="flex">
-        <div className="flex flex-col items-center justify-center w-full h-screen bg-indigo-950">
-          <h1 className="font-mono text-2xl font-bold py-3 border-2 p-2">
-            Upload Your File or Paste a Youtube Link
-          </h1>
-          <button id="fileButton" onClick={handleClick}>
-            Choose a File
-          </button>
-          <text>File Chosen: {fileName}</text>
-
-          <input
-            type="file"
-            onChange={(e) => setFileName(e.target.files?.[0]?.name || "")}
-            ref={fileRef}
-            className="hidden"
-          />
-          <div className="flex flex-wrap justify-center gap-2">
-            <input
-              className="border-2 rounded-md px-5 py-2 text-sm"
-              type="text"
-            />
-            <button className="text-black bg-white-100 ">Upload</button>
-          </div>
-        </div>
-      </div>
+      <Home></Home>
     </>
   );
 }

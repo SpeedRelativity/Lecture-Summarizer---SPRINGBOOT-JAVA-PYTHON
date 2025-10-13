@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -7,6 +8,12 @@ const Home = () => {
   const handleClick = () => {
     fileRef.current?.click();
     console.log(fileRef);
+  };
+
+  const navigate = useNavigate();
+
+  const goToPage = (link: string) => {
+    navigate(link);
   };
 
   return (
@@ -36,8 +43,11 @@ const Home = () => {
             type="text"
             placeholder="Enter Youtube Link"
           />
-          <button className="text-black bg-indigo-400 rounded-md px-6 py-2 my-2">
-            Upload
+          <button
+            className="text-black bg-indigo-400 rounded-md px-6 py-2 my-2"
+            onClick={() => goToPage("/processing")}
+          >
+            Submit
           </button>
         </div>
       </div>

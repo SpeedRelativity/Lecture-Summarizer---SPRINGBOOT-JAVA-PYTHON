@@ -8,7 +8,7 @@ import NotFoundPage from "./pages/NotFoundPage.tsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
-  { path: "/processing", element: <Processing /> },
+  { path: "/submission", element: <Processing /> },
   { path: "/*", element: <NotFoundPage /> },
 ]);
 

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const fileRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState("");
+  const [link, setLink] = useState("");
 
   const handleClick = () => {
     fileRef.current?.click();
@@ -14,6 +15,12 @@ const Home = () => {
 
   const goToPage = (link: string) => {
     navigate(link);
+    const response = fetch("http://localhost:8080/submission", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url: link }),
+    });
+    console.log("server response is: ", response);
   };
 
   return (

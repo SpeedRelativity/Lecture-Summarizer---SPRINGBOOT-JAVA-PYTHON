@@ -16,9 +16,10 @@ public class LectureSummaryApplication {
 
     }
 
-    @GetMapping("/submission")
-    public void startPythonWorker(){
+    @GetMapping()
+    public String startPythonWorker(){
         System.out.println("Lecture Summary Application started");
+        return "Lecture Summary Application started";
     }
 
 }

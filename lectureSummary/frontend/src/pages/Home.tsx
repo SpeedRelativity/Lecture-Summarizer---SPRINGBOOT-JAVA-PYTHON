@@ -13,14 +13,15 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  const goToPage = (link: string) => {
-    navigate(link);
-    const response = fetch("http://localhost:8080/submission", {
+  const goToPage = async (link: string) => {
+    const response = await fetch("http://localhost:8080/submission", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ url: link }),
     });
-    console.log("server response is: ", response);
+    const data = await response.text();
+    navigate(link);
+    console.log("server response is: ", data);
   };
 
   return (
@@ -52,7 +53,7 @@ const Home = () => {
           />
           <button
             className="text-black bg-indigo-400 rounded-md px-6 py-2 my-2"
-            onClick={() => goToPage("/processing")}
+            onClick={() => goToPage("/submission")}
           >
             Submit
           </button>

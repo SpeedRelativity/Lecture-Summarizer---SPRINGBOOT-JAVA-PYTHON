@@ -1,7 +1,8 @@
 const Processing = () => {
   return (
     <div>
-      <h1 className="">Processing...</h1>
+      <h1 className="">Jobs in queue: </h1>
+      <div></div>
     </div>
   );
 };

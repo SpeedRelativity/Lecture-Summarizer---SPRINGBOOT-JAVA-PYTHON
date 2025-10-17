@@ -13,14 +13,23 @@ const Home = () => {
 
   const navigate = useNavigate();
 
+  type Job = {
+    jobId: string;
+    url: string;
+    status: "queued" | "processing" | "completed" | "failed";
+  };
+
   const goToPage = async (link: string) => {
     const response = await fetch("http://localhost:8080/submission", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ url: link }),
     });
-    const data = await response.text();
-    navigate(link);
+    const data: Job = await response.json();
+    if (data) {
+      navigate(link);
+    }
+
     console.log("server response is: ", data);
   };
 

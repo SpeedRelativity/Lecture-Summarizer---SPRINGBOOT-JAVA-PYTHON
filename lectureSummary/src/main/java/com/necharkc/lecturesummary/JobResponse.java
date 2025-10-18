@@ -1,3 +1,3 @@
 package com.necharkc.lecturesummary;
 
-public record JobResponse( String jobId, String url, LectureSummaryApplication.JobStatus status) {}
+public record JobResponse( String jobId, String url, JobStatus status) {}

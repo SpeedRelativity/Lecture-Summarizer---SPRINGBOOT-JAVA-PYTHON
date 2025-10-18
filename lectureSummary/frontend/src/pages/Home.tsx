@@ -16,7 +16,7 @@ const Home = () => {
   type Job = {
     jobId: string;
     url: string;
-    status: "queued" | "processing" | "completed" | "failed";
+    status: "QUEUED" | "PROCESSING" | "COMPLETED" | "FAILED";
   };
 
   const goToPage = async (link: string) => {

@@ -1,6 +1,7 @@
 package com.necharkc.lecturesummary;
 
 // My imports
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 
@@ -10,12 +11,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
 
+
 @SpringBootApplication
-@RestController
 @CrossOrigin(origins = "http://localhost:5173")
+@RestController
+
 public class LectureSummaryApplication {
 
-    enum JobStatus { QUEUED, PROCESSING, COMPLETE, FAILED };
+    private final JobRepository jobRepository;
+
+    public LectureSummaryApplication(JobRepository jobRepository) {
+        this.jobRepository = jobRepository;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(LectureSummaryApplication.class, args);
@@ -28,9 +35,15 @@ public class LectureSummaryApplication {
 
     @PostMapping("/submission")
     public JobResponse submittedAPI(@RequestBody SubmittedRequest request){
-        String id =  UUID.randomUUID().toString();
-        String url = request.url();
 
-        return new JobResponse(id, url, JobStatus.QUEUED);
+        Job job = new Job();
+        job.setId(UUID.randomUUID().toString());
+        job.setUrl(request.url());
+        job.setStatus(JobStatus.QUEUED);
+        job.setCreatedAt(LocalDateTime.now());
+
+        jobRepository.save(job);
+
+        return new JobResponse(job.getId(), job.getUrl(), job.getStatus());
     }
 }

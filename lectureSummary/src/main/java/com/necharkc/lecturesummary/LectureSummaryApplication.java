@@ -38,7 +38,7 @@ public class LectureSummaryApplication {
 
         Job job = new Job();
         job.setId(UUID.randomUUID().toString());
-        job.setUrl(request.url());
+        job.setUrl(request.ytlink());
         job.setStatus(JobStatus.QUEUED);
         job.setCreatedAt(LocalDateTime.now());
 

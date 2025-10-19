@@ -1,3 +1,3 @@
 package com.necharkc.lecturesummary;
 
-public record SubmittedRequest (String url) {}
+public record SubmittedRequest (String ytlink) {}

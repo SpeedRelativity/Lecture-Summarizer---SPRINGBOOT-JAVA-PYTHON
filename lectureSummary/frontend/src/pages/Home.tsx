@@ -2,14 +2,14 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const fileRef = useRef<HTMLInputElement>(null);
-  const [fileName, setFileName] = useState("");
+  // const fileRef = useRef<HTMLInputElement>(null);
+  // const [fileName, setFileName] = useState("");
   const [ytlink, setLink] = useState("watch?v=dQw4w9WgXcQ");
 
-  const handleClick = () => {
-    fileRef.current?.click();
-    console.log(fileRef);
-  };
+  // const handleClick = () => {
+  //   fileRef.current?.click();
+  //   console.log(fileRef);
+  // };
 
   const navigate = useNavigate();
 

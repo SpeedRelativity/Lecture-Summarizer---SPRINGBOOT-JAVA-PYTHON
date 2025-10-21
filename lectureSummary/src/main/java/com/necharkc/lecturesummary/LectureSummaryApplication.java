@@ -2,6 +2,7 @@ package com.necharkc.lecturesummary;
 
 // My imports
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -28,11 +29,6 @@ public class LectureSummaryApplication {
         SpringApplication.run(LectureSummaryApplication.class, args);
     }
 
-    @GetMapping()
-    public String startPythonWorker(){
-        return "Lecture Summary Application started";
-    }
-
     @PostMapping("/submission")
     public JobResponse submittedAPI(@RequestBody SubmittedRequest request){
 
@@ -46,4 +42,19 @@ public class LectureSummaryApplication {
 
         return new JobResponse(job.getId(), job.getUrl(), job.getStatus());
     }
+    @CrossOrigin(origins = "http://localhost:5173")
+    @GetMapping("/jobs/{jobId}")
+    public JobResponse getJobStatus(@PathVariable String jobId){ // jobId is dynamic, so its of type path variable.
+        Job job = jobRepository.findById(jobId).orElseThrow(() -> new RuntimeException("Job not found." + jobId));
+        System.out.println("id requested");
+        return new JobResponse(job.getId(), job.getUrl(), job.getStatus());
+    }
+    @CrossOrigin(origins = "http://localhost:5173")
+    @GetMapping("/jobs")
+    public List<JobResponse> allJobs() {
+        List<Job> jobs = jobRepository.findAll();
+
+        return jobs.stream().map(job -> new JobResponse(job.getId(), job.getUrl(), job.getStatus())).toList();
+    }
+
 }

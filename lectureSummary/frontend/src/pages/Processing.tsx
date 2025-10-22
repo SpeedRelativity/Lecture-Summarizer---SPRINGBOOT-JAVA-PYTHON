@@ -11,7 +11,7 @@ const Processing = () => {
 
   useEffect(() => {
     fetchJobs();
-
+    // Polling every 5 seconds -- polling means checking for new jobs every few seconds. We learnt this in OS class too.
     const interval = setInterval(() => {
       fetchJobs();
     }, 5000);

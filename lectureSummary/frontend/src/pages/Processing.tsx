@@ -11,6 +11,11 @@ const Processing = () => {
 
   useEffect(() => {
     fetchJobs();
+
+    const interval = setInterval(() => {
+      fetchJobs();
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const fetchJobs = async () => {

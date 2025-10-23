@@ -1,9 +1,12 @@
 package com.necharkc.lecturesummary;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JobRepository extends JpaRepository<Job, String> { // the entity and the type of primary key (Entity = Job, id = String)
+    List<Job> findByStatus(JobStatus status);
 
 }

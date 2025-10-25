@@ -16,6 +16,7 @@ public class JobProcessorService {
 
     public JobProcessorService(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
+        System.out.println("✅ JobProcessorService created!");
     }
 
     @Scheduled(fixedDelay = 5000)

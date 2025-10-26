@@ -1,20 +1,46 @@
 import yt_dlp as ytdlp
 import sys
 from time import sleep
+import os
+
+
 
 def download(job,url):
 
-    print(f"Starting download for job {job} from URL: {url}")
+    try:
+
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        output_path = os.path.join(base_path, 'audios')
+
+        if not os.path.exists(output_path):
+            os.makedirs(output_path)
+    
+        ydl_opts = {
+            'format': 'best',
+            'outtmpl': f'{output_path}/%(title)s.%(ext)s',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+            
+            "overwrite": True,
+            "nopostoverwrites": False,
+            }
+
+        with ytdlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
+
+        return True
+    except Exception as e:
+        print(f"Error downloading {url}: {str(e)}")
+        return False
+
+
+
+    
     sleep(5)
 
-
-    result = {
-    "jobId": job,
-    "title": f"Video Title from {url}",
-    "transcription": f"This is a simulated transcription of {url}. In reality, we would download the video, extract audio, and use speech-to-text.",
-    "summary": f"This video discusses important topics. URL: {url}",
-    "status": "COMPLETED"
-        }
     
 
 

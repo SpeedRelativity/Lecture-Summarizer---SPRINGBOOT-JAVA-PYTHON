@@ -13,13 +13,16 @@ import java.util.List;
 public class JobProcessorService {
 
     private final JobRepository jobRepository;
+    private final PythonService pythonService;
 
-    public JobProcessorService(JobRepository jobRepository) {
+    public JobProcessorService(JobRepository jobRepository, PythonService pythonService) {
         this.jobRepository = jobRepository;
+        this.pythonService = pythonService;
         System.out.println("✅ JobProcessorService created!");
+        System.out.println("✅ PythonService created!");
     }
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 10000)
     public void processJobs() {
 
         System.out.println("🔍 Checking for queued jobs...");
@@ -42,11 +45,22 @@ public class JobProcessorService {
             job.setStatus(JobStatus.PROCESSING);
             jobRepository.save(job);
 
+            PythonService.ProcessResult result = pythonService.PythonVideo(job.getId(), job.getUrl());
+
+            if (result.success) {
+                job.setStatus(JobStatus.COMPLETED);
+                jobRepository.save(job);
+                System.out.println("✅ Job completed: " + job.getId());
+            }
+            else {
+                // Handle failure
+                job.setStatus(JobStatus.FAILED);
+                job.setErrorMessage(result.errorMessage);
+                System.err.println("❌ Job failed: " + job.getId());
+            }
+            jobRepository.save(job);
             // wait 10 seconds
             Thread.sleep(10000);
-
-            job.setStatus(JobStatus.COMPLETED);
-            jobRepository.save(job);
 
         } catch (Exception e) {
             job.setStatus(JobStatus.FAILED);

@@ -1,14 +1,6 @@
 import yt_dlp as ytdlp
 import sys
-from time import sleep
-import os
 from pathlib import Path
-from dotenv import load_dotenv
-load_dotenv()
-
-
-
-
 
 def download(job,url):
 
@@ -40,26 +32,3 @@ def download(job,url):
     except Exception as e:
         print(f"Error downloading {url}: {str(e)}")
         return False
-
-
-
-    
-    sleep(5)
-
-    
-
-
-def main():
-
-    job = sys.argv[1]
-    url = sys.argv[2]
-
-    try:
-        result = download(job,url)
-        print(f"Download completed for job {job}: {result}")
-    except Exception as e:
-        print(f"Error processing job {job}: {str(e)}")
-    return result
-
-if __name__ == "__main__":
-    main()

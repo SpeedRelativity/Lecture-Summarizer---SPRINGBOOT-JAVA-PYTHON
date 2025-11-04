@@ -1,26 +1,36 @@
 from dotenv import load_dotenv
 from openai import OpenAI
+import os
+
+from groq import Groq
+
 load_dotenv()
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = Groq()
+
+
+#client = OpenAI(api_key=os.getenv("GROQ_API_KEY"))
 
 def summarize_text(text):
     try:
         print("Generating summary...")
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="llama-3.3-70b-versatile",
             messages=[
-                {
-                    "role": "system",
-                    "content": "You are a helpful assistant that summarizes lecture transcripts into concise summaries."
-                },
-                {
-                    "role": "user",
-                    "content": f"Summarize the following lecture transcript:\n\n{text}"
-                }
+            {
+                "role": "system",
+                "content": "You are a lecture summarizer assistant that summarizes video transcripts into concise summaries and study notes."
+            },
+            {
+                "role": "user",
+                "content": f"Summarize the following lecture transcript:\n\n{text}"
+            }
             ],
-            max_tokens=300,
-            temperature=0.5,
+            temperature=1,
+            max_completion_tokens=1024,
+            top_p=1,
+            stream=False,
+            stop=None
         )
         summary = response.choices[0].message.content
         print("Summary generated.")

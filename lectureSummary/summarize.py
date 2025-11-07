@@ -9,8 +9,6 @@ load_dotenv()
 client = Groq()
 
 
-#client = OpenAI(api_key=os.getenv("GROQ_API_KEY"))
-
 def summarize_text(text):
     try:
         print("Generating summary...")

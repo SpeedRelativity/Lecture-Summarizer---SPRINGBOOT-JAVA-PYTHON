@@ -1,7 +1,6 @@
-# 🎓 Lecture Summarizer
+# 🎓 Video Summarizer using ytlib, OpenAI Whisper, LLM 
 
-A Python-based tool that **automatically transcribes and summarizes lectures, talks, and YouTube videos**.  
-Powered by **Whisper** for transcription and an intelligent summarizer for clean, structured study notes.
+AI workflow that **automatically transcribes and summarizes lectures, talks, and YouTube videos**.  
 
 ---
 
@@ -12,7 +11,7 @@ Powered by **Whisper** for transcription and an intelligent summarizer for clean
 - 🔗 **YouTube Integration** — Download and process videos directly from YouTube URLs.  
 - ⚙️ **Job Queue System** — Handles multiple transcription/summarization jobs concurrently.  
 - 🖥️ **Frontend Integration (in progress)** — React-based UI to view jobs, summaries, and transcripts.  
-- 💾 **Database Support (up next)** — Store processed summaries for easy retrieval.
+- 💾 **Database Support (up next)** — Store processed summaries for easy retrieval (WIP)
 
 ---
 

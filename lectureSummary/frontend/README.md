@@ -1,5 +1,7 @@
 # React + Typescript + Vite + Java Backend + Python Worker
 
+- Python libraries used: yt_dlp, openai whisper, ffmpeg, using groq api for LLM.
+
 # The flow of the program
 
 - Frontend and backend are two separate applications.

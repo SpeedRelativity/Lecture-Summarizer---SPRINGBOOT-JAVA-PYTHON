@@ -45,7 +45,7 @@ public class JobProcessorService {
             job.setStatus(JobStatus.PROCESSING);
             jobRepository.save(job);
 
-            PythonService.ProcessResult result = pythonService.PythonVideo(job.getId(), job.getUrl());
+            PythonService.ProcessResult result = pythonService.processVideo(job.getId(), job.getUrl());
 
             if (result.success) {
                 job.setStatus(JobStatus.COMPLETED);

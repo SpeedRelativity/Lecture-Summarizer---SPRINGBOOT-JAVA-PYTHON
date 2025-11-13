@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 type Job = {
   jobId: string;
@@ -14,7 +15,7 @@ const Processing = () => {
     // Polling every 5 seconds -- polling means checking for new jobs every few seconds. We learnt this in OS class too.
     const interval = setInterval(() => {
       fetchJobs();
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 

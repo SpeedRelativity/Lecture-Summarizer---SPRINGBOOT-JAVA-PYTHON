@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   // const fileRef = useRef<HTMLInputElement>(null);
   // const [fileName, setFileName] = useState("");
-  const [ytlink, setLink] = useState("watch?v=dQw4w9WgXcQ");
+  const [ytlink, setLink] = useState(
+    "https://www.youtube.com/watch?v=jNQXAC9IVRw"
+  );
 
   // const handleClick = () => {
   //   fileRef.current?.click();

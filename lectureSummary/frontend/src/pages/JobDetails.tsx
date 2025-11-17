@@ -186,7 +186,7 @@ const JobDetails = () => {
                   onClick={() => copyToClipboard(job.summary || "")}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition text-sm font-semibold"
                 >
-                  📋 Copy
+                  Copy
                 </button>
               </div>
               <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
@@ -200,13 +200,13 @@ const JobDetails = () => {
             <div className="bg-white rounded-xl shadow-lg p-8">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-3xl font-bold text-gray-800">
-                  🎤 Full Transcription
+                  Full Transcription
                 </h2>
                 <button
                   onClick={() => copyToClipboard(job.transcription || "")}
                   className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition text-sm font-semibold"
                 >
-                  📋 Copy
+                  Copy
                 </button>
               </div>
               <div className="bg-gray-50 p-6 rounded-lg max-h-96 overflow-y-auto border border-gray-200">

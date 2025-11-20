@@ -257,17 +257,17 @@ On the job details page, you can:
 
 ### Home Page
 
-![Home Page](screenshots/home.png)
+![Home Page](./home.png)
 _Main landing page with YouTube URL input and feature highlights_
 
 ### Jobs Overview
 
-![Jobs Overview](screenshots/processing.png)
+![Jobs Overview](./processing.png)
 _Table view showing all submitted jobs with status indicators_
 
 ### Job Details
 
-![Job Details](screenshots/details.png)
+![Job Details](./result.png)
 _Detailed view with AI-generated summary and full transcription_
 
 ## Project Structure

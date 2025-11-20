@@ -1,1 +1,10 @@
 venv/
+# Python
+python-worker/venv/
+python-worker/__pycache__/
+python-worker/*.pyc
+python-worker/.env
+
+# Generated files
+generatedAudioFiles/
+audios/

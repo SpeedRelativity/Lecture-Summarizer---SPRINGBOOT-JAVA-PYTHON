@@ -1,4 +1,4 @@
-# Lecture Summary
+# Lecture Summary -- SCREENSHOT BELOW 📸  
 
 A full-stack application that transforms YouTube lecture videos into concise, AI-generated summaries and transcriptions. The application leverages OpenAI's Whisper AI for accurate audio transcription and Groq's language models for intelligent summarization.
 

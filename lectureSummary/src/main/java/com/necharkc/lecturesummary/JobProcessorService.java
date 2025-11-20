@@ -48,17 +48,26 @@ public class JobProcessorService {
             PythonService.ProcessResult result = pythonService.processVideo(job.getId(), job.getUrl());
 
             if (result.success) {
+                // Update job with processing results
+                job.setTitle(result.title);
+                job.setTranscription(result.transcription);
+                job.setSummary(result.summary);
                 job.setStatus(JobStatus.COMPLETED);
                 jobRepository.save(job);
                 System.out.println("✅ Job completed: " + job.getId());
+                System.out.println("   Title: " + result.title);
+                System.out.println("   Transcription length: " + result.transcription.length());
+                System.out.println("   Summary length: " + result.summary.length());
             }
             else {
                 // Handle failure
                 job.setStatus(JobStatus.FAILED);
                 job.setErrorMessage(result.errorMessage);
                 System.err.println("❌ Job failed: " + job.getId());
+                System.err.println("   Error: " + result.errorMessage);
+                jobRepository.save(job);
             }
-            jobRepository.save(job);
+
             // wait 10 seconds
             Thread.sleep(10000);
 
@@ -66,6 +75,8 @@ public class JobProcessorService {
             job.setStatus(JobStatus.FAILED);
             job.setErrorMessage(e.getMessage());
             jobRepository.save(job);
+            System.err.println("❌ Exception processing job: " + job.getId());
+            System.err.println("   Error: " + e.getMessage());
         };
 
 

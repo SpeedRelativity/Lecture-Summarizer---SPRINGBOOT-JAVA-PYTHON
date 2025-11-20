@@ -59,4 +59,11 @@ public class LectureSummaryApplication {
         return jobs.stream().map(job -> new JobResponse(job.getId(), job.getUrl(), job.getStatus())).toList();
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
+    @GetMapping("/jobs/{jobId}/details")
+    public Job getJobDetails(@PathVariable String jobId) {
+        return jobRepository.findById(jobId)
+                .orElseThrow(() -> new RuntimeException("Job not found: " + jobId));
+    }
+
 }

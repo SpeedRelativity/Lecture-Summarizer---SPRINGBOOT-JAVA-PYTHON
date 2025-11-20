@@ -122,7 +122,7 @@ const JobDetails = () => {
               <span className="font-semibold text-gray-700">YouTube URL:</span>
 
               <a
-                href={`https://youtube.com/watch?v=${job.url}`}
+                href={job.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ml-3 text-blue-600 hover:underline text-sm"

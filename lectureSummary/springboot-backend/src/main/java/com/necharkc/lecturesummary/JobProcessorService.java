@@ -13,11 +13,10 @@ import java.util.List;
 public class JobProcessorService {
 
     private final JobRepository jobRepository;
-    private final PythonService pythonService;
-
-    public JobProcessorService(JobRepository jobRepository, PythonService pythonService) {
+    private final PythonApiService pythonApiService;
+    public JobProcessorService(JobRepository jobRepository, PythonApiService pythonApiService) {
         this.jobRepository = jobRepository;
-        this.pythonService = pythonService;
+        this.pythonApiService = pythonApiService;
         System.out.println("✅ JobProcessorService created!");
         System.out.println("✅ PythonService created!");
     }
@@ -45,7 +44,7 @@ public class JobProcessorService {
             job.setStatus(JobStatus.PROCESSING);
             jobRepository.save(job);
 
-            PythonService.ProcessResult result = pythonService.processVideo(job.getId(), job.getUrl());
+            PythonApiService.ProcessResult result = pythonApiService.processVideo(job.getId(), job.getUrl());
 
             if (result.success) {
                 // Update job with processing results

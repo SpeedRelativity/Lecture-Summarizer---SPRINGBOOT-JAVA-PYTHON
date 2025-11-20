@@ -1,5 +1,4 @@
 from dotenv import load_dotenv
-from openai import OpenAI
 import os
 
 from groq import Groq

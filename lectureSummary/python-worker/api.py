@@ -3,6 +3,7 @@ import sys
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel # data validation
+from typing import Optional
 import yt_dlp as ytdlp
 import sys
 import os
@@ -20,9 +21,10 @@ class VideoRequest(BaseModel):
 
 class videoResponse(BaseModel):
     success: bool
-    title: str = None
-    summary: str = None
-    error: str = None
+    title: Optional[str] = None
+    transcript: Optional[str] = None
+    summary: Optional[str] = None
+    error: Optional[str] = None
 
 
 
@@ -47,10 +49,15 @@ async def process_video(request: VideoRequest):
 
         title = get_video_title(request.video_url)
         print(f"Video title: {title}")
+    
+        
+        # Download audio
+        print("⬇️  Downloading audio...")
+        audio_file = download(request.job_id, request.video_url)
+        print(f"✅ Audio file: {audio_file}")
 
-        audio_file = download(request.video_url, request.job_id)
         if not audio_file:
-            raise HTTPException(status_code=500, detail="Failed to download video.")
+            raise HTTPException(status_code=500, detail="Failed to download audio")
 
         transcription = transcribe_audio(audio_file)
         if not transcription:
@@ -60,12 +67,12 @@ async def process_video(request: VideoRequest):
         if not summary:
             raise HTTPException(status_code=500, detail="Failed to generate summary.")
 
-        return videoResponse(success=True, title=title, summary=summary, error=None)
+        return videoResponse(success=True, title=title, transcript=transcription, summary=summary, error=None)
     
     except Exception as e:
         error_message = f"Error processing video: {str(e)}"
         print(error_message)
-        return videoResponse(success=False, title=None, summary=None, error=error_message)
+        return videoResponse(success=False, title=None, transcript=None, summary=None, error=error_message)
     
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8001)
